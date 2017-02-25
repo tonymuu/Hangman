@@ -42,7 +42,7 @@ app.post('/guess', (req, res) => {
   res.json(currentState(req.body.name, req.body.id));
 });
 
-app.listen(8080, (err) => {
+app.listen(process.env.PORT || 8080, (err) => {
   if (err) throw err;
   process.stdout.write('Running at port 8080');
 });
