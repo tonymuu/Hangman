@@ -1,0 +1,12 @@
+#puzzle {
+  font-size: 120px;
+}
+
+p.word {
+  font-weight: bold;
+  font-size: 100px;
+}
+
+.btn-primary {
+  padding: 10px;
+}

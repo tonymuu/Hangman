@@ -1,0 +1,18 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "A hangman game using Angular and Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tony Mu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "node-uuid": "^1.4.7",
+    "pug": "^2.0.0-beta11"
+  }
+}
