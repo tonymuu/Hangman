@@ -1,6 +1,7 @@
 app.controller('MainController', ['$scope', '$http', function($scope, $http) {
   $scope.guesses = [];
   $scope.letters = [];
+  $scope.keyPressed = 0;
 
   $scope.displayName = false;
   $scope.playAgain = false;
@@ -19,6 +20,8 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
   $scope.lost = function() {
     return $scope.status === 3;
   };
+
+  angular.element(document.getElementById('kb')).triggerHandler('keyPressed');
 
   $scope.request = function(url, data, callback) {
     return $http.post(url, data).then(function(res) {
@@ -56,7 +59,6 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
 
   $scope.startNewGame = function() {
     if (!$scope.myName) $scope.myName = "Anonymous Person";
-    console.log($scope.myName);
     $scope.request('/new', { id: $scope.id, name: $scope.myName },
     $scope.refresh).then(function() {
       $scope.displayName = true;
@@ -69,6 +71,12 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
     $scope.refresh);
   };
 
+  $scope.onKeyPress = function($event) {
+    if ($scope.inProgress()) {
+      var letter = String.fromCharCode($event.keyCode);
+      $scope.guessLetter(letter);
+    }
+  };
 }]);
 
 var draw = function(remainingMissesCount) {
@@ -133,15 +141,5 @@ var draw = function(remainingMissesCount) {
 
       default: return;
     }
-
-
-
-
-
-
-
-
   }
 };
-
-draw();
