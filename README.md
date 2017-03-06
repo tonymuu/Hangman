@@ -4,6 +4,14 @@ A minimalistic hangman game written mostly in JavaScript, additional features in
 ## Demo
 http://hangman-tonymu.herokuapp.com/
 
+## Installation
+1. Clone or download this repo
+2. In terminal, navigate to the root folder
+3. "npm install"
+4. "npm start"
+5. Go to localhost:8080
+6. Enjoy! 
+
 ## Technologies
 ### Client
 Written in JavaScript, using Angular and Pug.
