@@ -1,3 +1,7 @@
+#hangman {
+  border: 1px solid black;
+}
+
 #puzzle {
   font-size: 120px;
 }

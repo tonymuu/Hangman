@@ -50,6 +50,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
     $scope.error = undefined;
     $scope.totalGames = data.totalGames;
     $scope.wonGames = data.wonGames;
+    draw($scope.remainingMissesCount);
     return data;
   };
 
@@ -69,3 +70,78 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
   };
 
 }]);
+
+var draw = function(remainingMissesCount) {
+  var canvas = document.getElementById('hangman');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'rgba(0, 0, 200)';
+
+    switch(remainingMissesCount) {
+      case 9:    // bottom
+          ctx.fillRect(50, 205, 500, 5);
+          break;
+
+      case 8:    // vertical
+          ctx.fillRect(100, 10, 100, 5);
+          break;
+
+      case 7:    // horizontal
+          ctx.fillRect(100, 10, 5, 200);
+          break;
+
+      case 6:    // string
+          ctx.fillRect(200, 10, 5, 40);
+          break;
+
+      case 5:    // head
+          ctx.beginPath();
+          ctx.arc(200, 70, 20, 0, Math.PI * 2, true);
+          ctx.stroke();
+          break;
+
+      case 4:    // body
+          ctx.moveTo(200, 90);
+          ctx.lineTo(200, 140);
+          ctx.stroke();
+          break;
+
+      case 3:    // left arm
+          ctx.moveTo(200, 110);
+          ctx.lineTo(160, 90);
+          ctx.stroke();
+          break;
+
+      case 2:    // right arm
+          ctx.moveTo(200, 110);
+          ctx.lineTo(240, 90);
+          ctx.stroke();
+          break;
+
+      case 1:    // left foot
+          ctx.moveTo(200, 140);
+          ctx.lineTo(170, 170);
+          ctx.stroke();
+          break;
+
+      case 0:    // right foot
+          ctx.moveTo(200, 140);
+          ctx.lineTo(230, 170);
+          ctx.stroke();
+          ctx.closePath();
+          break;
+
+      default: return;
+    }
+
+
+
+
+
+
+
+
+  }
+};
+
+draw();

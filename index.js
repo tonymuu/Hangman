@@ -48,7 +48,6 @@ app.listen(process.env.PORT || 8080, (err) => {
 });
 
 var currentState = function(name, id) {
-  console.log(users.getAll());
   var games = users.get(name);
   if (!games) return { success: false, id, error: 'No such user exists' };
   var game = games.get(id);

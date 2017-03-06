@@ -5,32 +5,38 @@ block body
     .row
       .row-md-6.col-sm-9
         h1 Hang!
+    .row
+      .col-md-6
+        canvas(id="hangman", width="400", height="280")
+      .col-md-6
+        .row(id="greeting", ng-show="displayName")
+          h2 Welcome, {{ myName }}!!
         .input-group
           input(id="name", type="text", autocomplete="off", placeholder="What's your name?", class="form-control", ng-hide="displayName", ng-model="myName")
           .input-group-btn
             button(id="btn-start-game", class="btn btn-primary", ng-click="startNewGame()") Play!
-    .row(id="greeting", ng-show="displayName")
-      .col-md-12
-        h2 Welcome, {{ myName }}!!
-    .row(id="score", ng-show="displayName")
-      .col-md-12
-        h2 You are playing game {{'#' + totalGames}}. You have won {{wonGames + (wonGames > 1 ? ' games.' : ' game.') }}. Good job!!
-    .row(id="error", ng-show="error")
-      .col-md-12
-        div.alert.alert-danger
-          span.lead {{error}}
+        .row(id="score", ng-show="displayName")
+          h2 You are playing game {{'#' + totalGames}}.
+          h2 Won: {{ wonGames }}
+          h2 Lost: {{ totalGames - wonGames }}
+        .row(id="error", ng-show="error")
+          div.alert.alert-danger
+            span.lead {{error}}
     .row(id="puzzle", ng-show="inProgress()")
       .col-md-12
         span {{letters}}
-    .row(id="remaining", ng-show="inProgress()")
-      .col-md-12
-        span.lead {{remainingMissesCount === 1 ? 'You have only one more chance.' : 'You can only miss ' + remainingMissesCount + ' times.'}}
-    .row(id="letters", ng-show="inProgress()")
-      .col-md-12
-        each val, i in 'abcdefghijklmnopqrstuvwxyz'.split('')
-          if (i % 13 === 0)
-            .row
-          button(ng-click="guessLetter('" + val + "')", ng-class="cssForLetter('" + val + "')", ng-disabled="hasGuessed('" + val + "')" class="btn btn-lg btn-primary")= val.toUpperCase()
+    .row
+      .col-md-6
+        .row(id="remaining", ng-show="inProgress()")
+          .col-md-12
+            span.lead {{remainingMissesCount === 1 ? 'You have only one more chance.' : 'You can only miss ' + remainingMissesCount + ' times.'}}
+        .row(id="letters", ng-show="inProgress()")
+          .col-md-12
+            each val, i in 'abcdefghijklmnopqrstuvwxyz'.split('')
+              if (i % 13 === 0)
+                .row
+              button(ng-click="guessLetter('" + val + "')", ng-class="cssForLetter('" + val + "')", ng-disabled="hasGuessed('" + val + "')" class="btn btn-lg btn-primary")= val.toUpperCase()
+
     .row(id="won", ng-show="won()")
       .col-md-12
         div.alert.alert-success
